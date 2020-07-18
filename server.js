@@ -80,9 +80,24 @@ function addDep() {
     })
     .then(function(answer) {
         connection.query("INSERT INTO department (name) VALUES (?)", [answer.addDepartment], function(err, data) {
-            console.log([answer.addDepartment])
             if (err) throw err;
             console.log('Department added!')
+            track()
+        })
+    })
+}
+
+function addRole() {
+    inquirer.prompt({
+        name: "addRole",
+        type: "input",
+        message: "What role would you like to add?"
+    })
+    .then(function(answer) {
+        connection.query("INSERT INTO role (title) VALUES (?)", [answer.addRole], function(err, data) {
+            console.log([answer.addRole])
+            if (err) throw err;
+            console.log('Role added!')
             track()
         })
     })
