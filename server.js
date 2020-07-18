@@ -95,9 +95,40 @@ function addRole() {
     })
     .then(function(answer) {
         connection.query("INSERT INTO role (title) VALUES (?)", [answer.addRole], function(err, data) {
-            console.log([answer.addRole])
             if (err) throw err;
             console.log('Role added!')
+            track()
+        })
+    })
+}
+
+function addEmp() {
+    inquirer.prompt([
+        {
+        name: "first",
+        type: "input",
+        message: "What is the employee's first name?"
+        },
+        {
+        name: "last",
+        type: "input",
+        message: "What is the employee's last name?"
+        },
+        {
+        name: "first",
+        type: "roleID",
+        message: "What is the employee's role ID?"
+        },
+        {
+        name: "first",
+        type: "managerID",
+        message: "What is the employee's manager's ID (if applicable)?"
+        }
+    ])
+    .then(function(answer) {
+        connection.query("INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES (?, ?, ?, ?)", [answer.first, answer.last, answer.roleID, answer.managerID], function(err, data) {
+            if (err) throw err;
+            console.log('Employee added!')
             track()
         })
     })
