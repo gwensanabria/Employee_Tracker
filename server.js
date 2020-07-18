@@ -74,6 +74,16 @@ function track() {
 
 function addDep() {
     inquirer.prompt({
-        type: "input"
+        name: "addDepartment",
+        type: "input",
+        message: "What department do you want to add?"
+    })
+    .then(function(answer) {
+        connection.query("INSERT INTO department (name) VALUES (?)", [answer.addDepartment], function(err, data) {
+            console.log([answer.addDepartment])
+            if (err) throw err;
+            console.log('Department added!')
+            track()
+        })
     })
 }
