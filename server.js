@@ -88,13 +88,25 @@ function addDep() {
 }
 
 function addRole() {
-    inquirer.prompt({
+    inquirer.prompt([
+        {
         name: "addRole",
         type: "input",
         message: "What role would you like to add?"
-    })
+        },
+        {
+         name: "salary",
+         type: "number",
+         message: "What is the salary for the role?"   
+        },
+        {
+        name: "depID",
+        type: "number",
+        message: "What is the department ID?"
+        }
+    ])
     .then(function(answer) {
-        connection.query("INSERT INTO role (title) VALUES (?)", [answer.addRole], function(err, data) {
+        connection.query("INSERT INTO role (title, salary, departments_id) VALUES (?, ?, ?)", [answer.addRole, answer.salary, answer.depId], function(err, data) {
             if (err) throw err;
             console.log('Role added!')
             track()
@@ -116,12 +128,12 @@ function addEmp() {
         },
         {
         name: "roleID",
-        type: "input",
+        type: "number",
         message: "What is the employee's role ID?"
         },
         {
         name: "managerID",
-        type: "input",
+        type: "number",
         message: "What is the employee's manager's ID (0 if none)?"
         }
     ])
@@ -145,5 +157,12 @@ function viewRole() {
     connection.query ("SELECT * FROM role", function(err, res) {
         console.log(res);
         track()
+    })
+}
+
+function viewEmp() {
+    connection.query ("SELECT * FROM employee", function(err, res) {
+        console.log(res)
+        track();
     })
 }
