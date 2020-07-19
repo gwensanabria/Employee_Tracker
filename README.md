@@ -1,4 +1,4 @@
-# Foobar
+# Employee Tracker
 
 Allows user to:
   
