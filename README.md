@@ -27,6 +27,8 @@ $ npm install mysql inquirer dotenv
 $ node server.js
 ```
 
+![](employee_tracker.gif)
+
 ## Usage
 
 * In the terminal run the following after installation.
