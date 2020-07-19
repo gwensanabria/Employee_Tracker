@@ -23,7 +23,7 @@ function track() {
     inquirer.prompt({
         name: "action",
         type: "list",
-        message: "What would you like to add?",
+        message: "What would you like to do?",
         choices: [
             "Add a department?",
             "Add a role?",
@@ -79,7 +79,7 @@ function addDep() {
         message: "What department do you want to add?"
     })
     .then(function(answer) {
-        connection.query("INSERT INTO department (name) VALUES (?)", [answer.addDepartment], function(err, data) {
+        connection.query("INSERT INTO departments (name) VALUES (?)", [answer.addDepartment], function(err, data) {
             if (err) throw err;
             console.log('Department added!')
             track()
@@ -131,5 +131,19 @@ function addEmp() {
             console.log('Employee added!')
             track()
         })
+    })
+}
+
+function viewDep() {
+    connection.query ("SELECT * FROM departments", function(err, res) {
+        console.log(res);
+        track();
+    })
+}
+
+function viewRole() {
+    connection.query ("SELECT * FROM role", function(err, res) {
+        console.log(res);
+        track()
     })
 }
