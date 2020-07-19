@@ -115,14 +115,14 @@ function addEmp() {
         message: "What is the employee's last name?"
         },
         {
-        name: "first",
-        type: "roleID",
+        name: "roleID",
+        type: "input",
         message: "What is the employee's role ID?"
         },
         {
-        name: "first",
-        type: "managerID",
-        message: "What is the employee's manager's ID (if applicable)?"
+        name: "managerID",
+        type: "input",
+        message: "What is the employee's manager's ID (0 if none)?"
         }
     ])
     .then(function(answer) {

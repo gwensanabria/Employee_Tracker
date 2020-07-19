@@ -25,6 +25,8 @@
 --     constraint fk_manager FOREIGN KEY (manager_id) 
 -- )
 
+DROP DATABASE IF EXISTS Employee_TrackerDB;
+
 create database Employee_TrackerDB;
 
 use Employee_TrackerDB;
@@ -51,6 +53,6 @@ role_id int,
 constraint fk_role foreign key (role_id)
 references role(id),
 manager_id int,
-constraint fk_employee foreign key (manager_id)
+constraint fk_manager foreign key (manager_id)
 references employee(id)
 )
