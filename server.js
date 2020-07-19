@@ -106,7 +106,7 @@ function addRole() {
         }
     ])
     .then(function(answer) {
-        connection.query("INSERT INTO role (title, salary, departments_id) VALUES (?, ?, ?)", [answer.addRole, answer.salary, answer.depId], function(err, data) {
+        connection.query("INSERT INTO role (title, salary, departments_id) VALUES (?, ?, ?)", [answer.addRole, answer.salary, answer.depID], function(err, data) {
             if (err) throw err;
             console.log('Role added!')
             track()
@@ -164,5 +164,31 @@ function viewEmp() {
     connection.query ("SELECT * FROM employee", function(err, res) {
         console.log(res)
         track();
+    })
+}
+
+function update() {
+    connection.query("SELECT first_name, last_name, id FROM employee", function(err, res) {
+        const employees = res.map(employee => ({name:  employee.first_name + " " + employee.last_name, value: employee.id}))
+
+        inquirer.prompt([
+            {
+                name: "employee",
+                type: "list",
+                message: "Who's role would you like to update?",
+                choices: employees
+            },
+            {
+                name: "roleUp",
+                type: "number",
+                message: "What is the new role?"
+            }
+        ])
+        .then(function(res) {
+            connection.query(`UPDATE employee SET role_id = ${res.roleUp} WHERE id = ${res.employee}`, function(err, res) {
+                console.log(res);
+                track();
+            })
+        })
     })
 }
